@@ -1,20 +1,26 @@
-# File: meta-security/recipes-security/libpam-pwquality/libpam-pwquality_1.4.4.bb
-
-DESCRIPTION = "PAM module to check password strength"
-SECTION = "security"
+SUMMARY = "Check and Install libpam-pwquality"
+DESCRIPTION = "A recipe to ensure that libpam-pwquality is installed on Ubuntu 22.04 LTS"
 LICENSE = "CLOSED"
 
-SRC_URI = "http://archive.ubuntu.com/ubuntu/pool/main/libp/libpwquality/libpam-pwquality_1.4.4-1build2_amd64.deb"
+# No specific dependencies
+DEPENDS = ""
 
+# This recipe doesn't produce any packages
+ALLOW_EMPTY:${PN} = "1"
 
-DEPENDS = "dpkg"
+# Define the check and install script
+SRC_URI = "file://check_install_libpam_pwquality.sh"
 
-RDEPENDS_${PN} = "dpkg"
-
+# No source directory is needed
 S = "${WORKDIR}"
 
 do_install() {
-    dpkg -i ${S}/libpam-pwquality_1.4.4-1build2_amd64.deb
+    install -d ${D}${bindir}
+    install -m 0755 ${WORKDIR}/check_install_libpam_pwquality.sh ${D}${bindir}/check_install_libpam_pwquality
 }
 
-FILES_${PN} += "/usr/lib/x86_64-linux-gnu/security/pam_pwquality.so"
+# This recipe doesn't compile anything
+do_compile[noexec] = "1"
+
+# Add the script to the main package
+FILES:${PN} += "${bindir}/check_install_libpam_pwquality"
