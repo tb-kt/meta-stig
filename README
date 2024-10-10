@@ -2,40 +2,28 @@ This README file contains information on the contents of the meta-stig layer.
 
 Please see the corresponding sections below for details.
 
-Dependencies
-============
-
-  URI: <first dependency>
-  branch: <branch name>
-
-  URI: <second dependency>
-  branch: <branch name>
-
-  .
-  .
-  .
-
-Patches
-=======
-
-Please submit any patches against the meta-stig layer to the xxxx mailing list (xxxx@zzzz.org)
-and cc: the maintainer:
-
-Maintainer: XXX YYYYYY <xxx.yyyyyy@zzzzz.com>
-
 Table of Contents
 =================
 
   I. Adding the meta-stig layer to your build
- II. Misc
+ II. Adding Packagegroup
+ III. Required custom changes
 
 
 I. Adding the meta-stig layer to your build
-=================================================
+=============================================
 
 Run 'bitbake-layers add-layer meta-stig'
 
-II. Misc
-========
+II. Adding Packagegroup
+========================
 
---- replace with specific information about the meta-stig layer ---
+A packagegroup is created under meta-stig/recipes-ubuntu-stig. Under this packagegroup all recipes are listed. 
+This packagegroup can be added into local.conf as follows:
+
+IMAGE_INSTALL:append = " packagegroup-stig"
+
+
+III. Required custom changes
+=============================
+1. Replace the certificate in the stig V-260580, under the files directory with 
