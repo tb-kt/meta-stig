@@ -28,7 +28,7 @@ Some STIGs require a package manager. To enable this feature, add the following 
 
 ```
 EXTRA_IMAGE_FEATURES += "package-management"
-# Select based on the target system
+//Select based on the target system
 IMAGE_INSTALL:append = " apt dnf rpm" 
 PACKAGE_CLASSES ?= "package_deb package_rpm"
 ```
